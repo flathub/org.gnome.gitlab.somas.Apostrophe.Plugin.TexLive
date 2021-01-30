@@ -47,6 +47,10 @@
                 {
                     "type": "shell",
                     "commands": ["sed -i 's|/usr/local|/app/extensions/TexLive|g' makefile.common"]
+                },
+                {
+                    "type": "patch",
+                    "path" : "p7zip-gcc10.patch"
                 }
             ]
         },
