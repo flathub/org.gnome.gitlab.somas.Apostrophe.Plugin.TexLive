@@ -12,7 +12,6 @@ collection-xetex 1
 collection-latexrecommended 1
 collection-binextra 1
 collection-fontsrecommended 1
-collection-unicodetex 1
 instopt_adjustpath 0
 instopt_adjustrepo 1
 instopt_letter 0
