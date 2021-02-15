@@ -3,7 +3,7 @@
     "runtime": "org.gnome.gitlab.somas.Apostrophe",
     "branch": "stable",
     "runtime-version": "stable",
-    "sdk": "org.gnome.Sdk//3.36",
+    "sdk": "org.gnome.Sdk//3.38",
     "build-extension": true,
     "separate-locales": false,
     "appstream-compose": false,
@@ -11,7 +11,7 @@
     "build-options" : {
         "prepend-path": "/app/extensions/TexLive",
         "env": {
-            "PATH": "/app/extensions/TexLive/bin:/app/extensions/TexLive/2018/bin/x86_64-linux:/app/bin:/usr/bin"
+            "PATH": "/app/extensions/TexLive/bin:/app/extensions/TexLive/2020/bin/x86_64-linux:/app/bin:/usr/bin"
         }
     },
     "cleanup": ["/bin/wget"],
@@ -25,8 +25,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://ftp.gnu.org/gnu/wget/wget-1.19.4.tar.gz",
-                    "sha256": "93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5"
+                    "url": "https://ftp.gnu.org/gnu/wget/wget-1.21.tar.gz",
+                    "sha256": "b3bc1a9bd0c19836c9709c318d41c19c11215a07514f49f89b40b9d50ab49325"
                 }
             ]
         },
@@ -56,7 +56,7 @@
             "sources": [
                 {
                     "type":"file",
-                    "url": "http://mirrors.ctan.org/systems/texlive/Images/texlive.iso",
+                    "url": "http://mirrors.ctan.org/systems/texlive/Images/texlive2020.iso",
                     "sha512": "7c94bbcff5318e540dc0b03010896185d8985bcc2c2ac11906e831ec583fd574bf9720fce5efc29470c80bafe12f42ddaa392b96c460a27eda94f93c12e7b57d"
                 },
                 {
