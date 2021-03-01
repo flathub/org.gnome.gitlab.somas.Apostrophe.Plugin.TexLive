@@ -3,7 +3,7 @@
     "runtime": "org.gnome.gitlab.somas.Apostrophe",
     "branch": "stable",
     "runtime-version": "stable",
-    "sdk": "org.gnome.Sdk//3.36",
+    "sdk": "org.gnome.Sdk//3.38",
     "build-extension": true,
     "separate-locales": false,
     "appstream-compose": false,
@@ -47,6 +47,10 @@
                 {
                     "type": "shell",
                     "commands": ["sed -i 's|/usr/local|/app/extensions/TexLive|g' makefile.common"]
+                },
+                {
+                    "type": "patch",
+                    "path" : "p7zip-gcc10.patch"
                 }
             ]
         },
