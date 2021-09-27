@@ -1,4 +1,4 @@
-selected_scheme scheme-basic
+selected_scheme scheme-custom
 TEXDIR /app/extensions/TexLive/2018
 TEXMFCONFIG /app/extensions/TexLive/.texlive2018/texmf-config
 TEXMFHOME /app/extensions/TexLive/texmf
@@ -7,11 +7,14 @@ TEXMFSYSCONFIG /app/extensions/TexLive/2018/texmf-config
 TEXMFSYSVAR /app/extensions/TexLive/2018/texmf-var
 TEXMFVAR /app/extensions/TexLive/.texlive2018/texmf-var
 binary_x86_64-linux 1
-collection-latex 1
-collection-xetex 1
-collection-latexrecommended 1
-collection-binextra 1
+collection-basic 1
 collection-fontsrecommended 1
+collection-langcjk 1
+collection-latex 1
+collection-latexrecommended 1
+collection-metapost 1
+collection-plaingeneric 1
+collection-xetex 1
 instopt_adjustpath 0
 instopt_adjustrepo 1
 instopt_letter 0
