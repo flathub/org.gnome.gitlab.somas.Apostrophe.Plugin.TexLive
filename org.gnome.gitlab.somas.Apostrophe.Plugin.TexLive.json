@@ -2,8 +2,8 @@
     "id": "org.gnome.gitlab.somas.Apostrophe.Plugin.TexLive",
     "runtime": "org.gnome.gitlab.somas.Apostrophe",
     "branch": "stable",
-    "runtime-version": "stable",
-    "sdk": "org.gnome.Sdk//40",
+    "runtime-version": "master",
+    "sdk": "org.gnome.Sdk//48",
     "build-extension": true,
     "separate-locales": false,
     "appstream-compose": false,
@@ -11,7 +11,7 @@
     "build-options" : {
         "prepend-path": "/app/extensions/TexLive",
         "env": {
-            "PATH": "/app/extensions/TexLive/bin:/app/extensions/TexLive/2018/bin/x86_64-linux:/app/bin:/usr/bin"
+            "PATH": "/app/extensions/TexLive/bin:/app/extensions/TexLive/bin/x86_64-linux:/app/bin:/usr/bin"
         }
     },
     "cleanup": ["/bin/wget"],
@@ -25,32 +25,35 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://ftp.gnu.org/gnu/wget/wget-1.19.4.tar.gz",
-                    "sha256": "93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5"
+                    "url": "https://ftp.gnu.org/gnu/wget/wget2-2.1.0.tar.gz",
+                    "sha256": "a05dc5191c6bad9313fd6db2777a78f5527ba4774f665d5d69f5a7461b49e2e7"
                 }
             ]
         },
         {
             "name": "p7zip",
             "no-autogen": true,
-            "build-options": {
+            "make-args": [
+                "7z"
+            ],
+            "build-options" :{
                 "prefix": "/app/extensions/TexLive"
             },
-            "make-args": ["7z"],
-            "cleanup": ["*"],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://sourceforge.net/projects/p7zip/files/p7zip/16.02/p7zip_16.02_src_all.tar.bz2",
-                    "sha256": "5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f"
+                    "url": "https://github.com/p7zip-project/p7zip/archive/refs/tags/v17.05.tar.gz",
+                    "sha256": "d2788f892571058c08d27095c22154579dfefb807ebe357d145ab2ddddefb1a6",
+                    "x-checker-data": {
+                        "type": "json",
+                        "url": "https://api.github.com/repos/p7zip-project/p7zip/releases/latest",
+                        "version-query": ".tag_name",
+                        "url-query": "\"https://github.com/p7zip-project/p7zip/archive/refs/tags/\\($version).tar.gz\""
+                    }
                 },
                 {
                     "type": "shell",
                     "commands": ["sed -i 's|/usr/local|/app/extensions/TexLive|g' makefile.common"]
-                },
-                {
-                    "type": "patch",
-                    "path" : "p7zip-gcc10.patch"
                 }
             ]
         },
@@ -60,8 +63,8 @@
             "sources": [
                 {
                     "type":"file",
-                    "url": "http://mirrors.ctan.org/systems/texlive/Images/texlive.iso",
-                    "sha512": "bad51ec47613cf295ed77472d10e517fe79e501f73ff918a1068f03ef43f4394ceb165051132bcbcb53a05650b77ea907f327c1799c38ae476ca38620aa7c1fe"
+                    "url": "http://mirrors.ctan.org/systems/texlive/Images/texlive2025.iso",
+                    "sha512": "1fd9a2234d086f50c832ab3ac8b83477bbc39b1138a3c4a2351244c1fd4b8bea6d1ac81d4a5b0cba95f2e82c00f0d9df5b33189eb222e4bae5dae1523ef0da0e"
                 },
                 {
                     "type": "file",
@@ -69,28 +72,18 @@
                 },
                 {
                     "type": "shell",
-                    "commands": ["7z x texlive.iso"]
+                    "commands": ["7z x texlive2025.iso"]
+                },
+                {
+                    "type": "file",
+                    "path": "org.gnome.gitlab.somas.Apostrophe.Plugin.TexLive.appdata.xml"
                 }
             ],
             "build-commands": [
                 "chmod +x install-tl",
                 "echo \"In\" | TEXLIVE_INSTALL_PREFIX=/app/extensions/TexLive ./install-tl --profile texlive.profile",
-                "rm -rf /app/extensions/TexLive/texmf-dist/doc"
-            ]
-        },
-        {
-            "name": "appdata",
-            "buildsystem": "simple",
-            "build-commands": [
-                "mkdir -p /app/extensions/TexLive/share/appdata",
-                "install -Dm644 org.gnome.gitlab.somas.Apostrophe.Plugin.TexLive.appdata.xml /app/extensions/TexLive/share/appdata/org.gnome.gitlab.somas.Apostrophe.Plugin.TexLive.appdata.xml",
-                "appstream-compose --basename=org.gnome.gitlab.somas.Apostrophe.Plugin.TexLive --prefix=/app/extensions/TexLive --origin=flatpak org.gnome.gitlab.somas.Apostrophe.Plugin.TexLive"
-            ],
-            "sources": [
-                {
-                    "type": "file",
-                    "path": "org.gnome.gitlab.somas.Apostrophe.Plugin.TexLive.appdata.xml"
-                }
+                "rm -rf /app/extensions/TexLive/texmf-dist/doc",
+                "install -Dm644 org.gnome.gitlab.somas.Apostrophe.Plugin.TexLive.appdata.xml -t ${FLATPAK_DEST}/share/metainfo"
             ]
         }
     ]
